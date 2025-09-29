@@ -45,7 +45,7 @@ namespace kontrolni26092025_AleksejJuzin_III3
             private int ukupnoPrimeraka;
             private int dostupnoPrimeraka;
 
-            private int GodinaIzdanja
+            public int GodinaIzdanja
             {
                 get
                 {
@@ -57,7 +57,7 @@ namespace kontrolni26092025_AleksejJuzin_III3
                 }
             }
 
-            private int UkupnoPrimeraka
+            public int UkupnoPrimeraka
             {
 
                 get
@@ -71,7 +71,7 @@ namespace kontrolni26092025_AleksejJuzin_III3
 
             }
 
-            private int DostupnoPrimeraka
+            public int DostupnoPrimeraka
             {
 
                 get
@@ -152,7 +152,7 @@ namespace kontrolni26092025_AleksejJuzin_III3
         static void Main(string[] args)
         {
 
-            Knjiga[] knjige = new Knjiga[3];
+            List<Knjiga> knjige = new List<Knjiga>();
 
             for(Int16 i = 0; i < 3; i++)
             {
@@ -204,14 +204,16 @@ namespace kontrolni26092025_AleksejJuzin_III3
 
                 Knjiga knjiga = new Knjiga(naslov, autor, godinaIzdanja, ukupnoPrimeraka, dostupnoPrimeraka);
 
-                knjige.Append(knjiga);
+                knjige.Add(knjiga);
 
             }
 
             foreach(Knjiga knjiga in knjige)
             {
 
-                Console.WriteLine("unesite kolicinu primeraka za pozajmiti:");
+                int n = knjige.IndexOf(knjiga)+1;
+
+                Console.WriteLine($"unesite kolicinu primeraka za pozajmiti za knjigu #{n}:");
                 while (true)
                 {
                     if (!int.TryParse(Console.ReadLine(), out int result))
@@ -223,7 +225,7 @@ namespace kontrolni26092025_AleksejJuzin_III3
                     break;
                 }
 
-                Console.WriteLine("unesite kolicinu primeraka za vratiti:");
+                Console.WriteLine($"unesite kolicinu primeraka za vratiti za knjigu #{n}:");
                 while (true)
                 {
                     if (!int.TryParse(Console.ReadLine(), out int result))
@@ -239,12 +241,16 @@ namespace kontrolni26092025_AleksejJuzin_III3
 
             }
 
-            foreach(Knjiga knjiga in knjige)
+            foreach (Knjiga knjiga in knjige)
             {
+
+                Console.WriteLine($"ispis detalja za knjigu #{knjige.IndexOf(knjiga)+1}");
 
                 knjiga.ispisiDetalje();
 
             }
+
+            Console.ReadLine();
 
         }
     }
